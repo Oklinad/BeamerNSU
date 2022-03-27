@@ -10,4 +10,15 @@
 *.cb
 *.cb2
 .*.lb
-*.gz
+
+*.nav
+*.pre
+*.snm
+*.vrb
+
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
