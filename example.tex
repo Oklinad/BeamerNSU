@@ -1,13 +1,13 @@
-\documentclass[8pt, hyperref={pdftex,unicode}, green]{beamer}
-\usetheme{NSU}
+\documentclass[8pt, hyperref={pdftex,unicode}]{beamer}
+\usetheme[red]{NSU}
 
-
-\usepackage{helvet}
-\usepackage{tikz}
-
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
 
 \usepackage{colortbl}
-\newcommand{\cc}{\bf\cellcolor{green}}
+\newcommand{\cc}{\bf\cellcolor{mainColor2}} % color from NSU sty
+
 
 % --------------------------------------------------- %
 %                       Информация   	              %
@@ -21,7 +21,6 @@
     Анализ и восстановление комбинаторных объектов с~недостающими элементами на примере латинских~квадратов
 }
 \author[Данилко В. Р.]{Данилко Виталий Романович}
-
 \date{7 июля 2020 г.}
 
 \newcommand{\LSfive}[1]{
@@ -30,8 +29,6 @@
     \end{array}
 }
 
-\graphicspath{{figuras}}
-
 
 % --------------------------------------------------- %
 %                  Титульник + Содержание             %
@@ -39,27 +36,27 @@
 
 \begin{document}
 
-{
-\logo{}
 \begin{frame}
     \maketitle
+    \vspace*{10em}\par
     \begin{minipage}{\linewidth}
-      \hspace{0.25\linewidth}
-      \begin{minipage}{0.55\linewidth}\small
-        \textbf{Научные руководители:}\\
-        Кочетов Юрий Андреевич, д.\,ф-м.\,н.\\
-        Горкунов Евгений Владимирович, к.\,ф-м.\,н.\vspace{1em}\\
-        \textbf{Студент:}\\
-        Данилко Виталий Романович\\ 
-        НГУ ФИТ, группа 18227
-      \end{minipage}
+        \hspace{0.25\linewidth}
+        \begin{minipage}{0.55\linewidth}\small
+            \textbf{Научные руководители:}\\
+            Кочетов Юрий Андреевич, д.\,ф-м.\,н.\\
+            Горкунов Евгений Владимирович, к.\,ф-м.\,н.\vspace{1em}\\
+            \textbf{Студент:}\\
+            Данилко Виталий Романович\\
+            НГУ ФИТ, группа 18227
+        \end{minipage}
     \end{minipage}
 \end{frame}
-}
 
-% \begin{frame}{Содержание}
-%   \tableofcontents
-% \end{frame}
+
+\begin{frame}{Содержание}
+    \tableofcontents
+\end{frame}
+
 
 % --------------------------------------------------- %
 %                      Презентация                    %
@@ -75,8 +72,9 @@
             \item Расстояние между функциями
         \end{itemize}
     \end{block}
-    
+
 \end{frame}
+
 
 \section{Задачи}
 \begin{frame}{Задачи}
@@ -93,6 +91,7 @@
 
 \end{frame}
 
+
 \section{Определения}
 \subsection{Латинский квадрат}
 \begin{frame}{Определения}
@@ -100,9 +99,9 @@
     \begin{block}{Латинский квадрат}
         {\it Латинский квадрат порядка $n$} — это таблица $L = (l_{ij})$ размеров $n\times n$, заполненная $n$ элементами множества $M$ таким образом, что в каждой строке и в каждом столбце таблицы каждый элемент из $M$ встречается в точности один раз.
     \end{block}
-    
+
     $$
-    \LSfive{0 & 1 & 2 & 3 & 4 \\ \hline
+        \LSfive{0 & 1 & 2 & 3 & 4 \\ \hline
             4 & 0 & 1 & 2 & 3 \\ \hline
             3 & 4 & 0 & 1 & 2 \\ \hline
             2 & 3 & 4 & 0 & 1 \\ \hline
@@ -110,37 +109,38 @@
     $$
 \end{frame}
 
+
 \subsection{Ортогональность}
 \begin{frame}{Определения}
 
     \begin{block}{Ортогональность}
         Два латинских квадрата $L = (l_{ij})$ и $K = (k_{ij})$ порядка $n$ называются {\it ортогональными}, если все $n^2$ упорядоченных пар $(l_{ij}, k_{ij})$ различны.
     \end{block}
-    
+
     $$
-    \LSfive{
-        0 & 1 & 2 \\ \hline
-        1 & 2 & 0 \\ \hline
-        2 & 0 & 1 \\ \hline
-    }
-    \hspace{2em}
-    \LSfive{
-        0 & 1 & 2 \\ \hline
-        2 & 0 & 1 \\ \hline
-        1 & 2 & 0 \\ \hline
-    }
-    \hspace{2em}
-    \LSfive{
-        (0, 0) & (1, 1) & (2, 2) \\ \hline
-        (1, 2) & (2, 0) & (0, 1) \\ \hline
-        (2, 1) & (0, 2) & (1, 0) \\ \hline
-    }
+        \LSfive{
+            0 & 1 & 2 \\ \hline
+            1 & 2 & 0 \\ \hline
+            2 & 0 & 1 \\ \hline
+        }
+        \hspace{2em}
+        \LSfive{
+            0 & 1 & 2 \\ \hline
+            2 & 0 & 1 \\ \hline
+            1 & 2 & 0 \\ \hline
+        }
+        \hspace{2em}
+        \LSfive{
+            (0, 0) & (1, 1) & (2, 2) \\ \hline
+            (1, 2) & (2, 0) & (0, 1) \\ \hline
+            (2, 1) & (0, 2) & (1, 0) \\ \hline
+        }
     $$
-    
+
     \begin{block}{}
         Полная система содержит $n-1$ попарно ортогональных латинских квадратов порядка $n$.
     \end{block}
-    
+
 
 \end{frame}
 
@@ -151,55 +151,55 @@
     \begin{block}{Гипотеза (С. В. Августинович, ИМ СО РАН)}
         Полная система попарно ортогональных латинских квадратов порядка~$n$ при наличии не более $2n-1$ неизвестных элементов в каждом из квадратов однозначно восстанавливается.
     \end{block}
-    
+
     \begin{block}{Теорема}
-        Полная система попарно ортогональных латинских квадратов порядка $n \in \{3,4,5,7,8\}$ при наличии не более $2n-1$ неизвестных элементов в каждом из квадратов однозначно восстанавливается. 
+        Полная система попарно ортогональных латинских квадратов порядка $n \in \{3,4,5,7,8\}$ при наличии не более $2n-1$ неизвестных элементов в каждом из квадратов однозначно восстанавливается.
     \end{block}
-  
-\end{frame} 
+
+\end{frame}
 
 
 \section{Система Боуза}
 \begin{frame}{Система Боуза}
-    
+
     \begin{block}{}
-    \begin{gather*}
-        f(x,y)= \alpha x + y, \quad \alpha \in F_p^*\\
-        \begin{array}{|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|} 
-            \multicolumn{5}{c}{\alpha = 1} \\ \hline
-            0 & 1 & 2 & 3 & 4 \\ \hline
-            4 & 0 & 1 & 2 & 3 \\ \hline
-            3 & 4 & 0 & 1 & 2 \\ \hline
-            2 & 3 & 4 & 0 & 1 \\ \hline
-            1 & 2 & 3 & 4 & 0 \\ \hline
-        \end{array}\hspace{1em}
-        \begin{array}{|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|} 
-            \multicolumn{5}{c}{\alpha = 2} \\ \hline
-            0 & 1 & 2 & 3 & 4 \\ \hline
-            3 & 4 & 0 & 1 & 2 \\ \hline
-            1 & 2 & 3 & 4 & 0 \\ \hline
-            4 & 0 & 1 & 2 & 3 \\ \hline
-            2 & 3 & 4 & 0 & 1 \\ \hline
-        \end{array}\hspace{1em}
-        \begin{array}{|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|} 
-            \multicolumn{5}{c}{\alpha = 3} \\ \hline
-            0 & 1 & 2 & 3 & 4 \\ \hline
-            2 & 3 & 4 & 0 & 1 \\ \hline
-            4 & 0 & 1 & 2 & 3 \\ \hline
-            1 & 2 & 3 & 4 & 0 \\ \hline
-            3 & 4 & 0 & 1 & 2 \\ \hline
-        \end{array}\hspace{1em}
-        \begin{array}{|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|} 
-            \multicolumn{5}{c}{\alpha = 4} \\ \hline
-            0 & 1 & 2 & 3 & 4 \\ \hline
-            1 & 2 & 3 & 4 & 0 \\ \hline
-            2 & 3 & 4 & 0 & 1 \\ \hline
-            3 & 4 & 0 & 1 & 2 \\ \hline
-            4 & 0 & 1 & 2 & 3 \\ \hline
-        \end{array}
-    \end{gather*}
+        \begin{gather*}
+            f(x,y)= \alpha x + y, \quad \alpha \in F_p^*\\
+            \begin{array}{|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|}
+                \multicolumn{5}{c}{\alpha = 1} \\ \hline
+                0 & 1 & 2 & 3 & 4              \\ \hline
+                4 & 0 & 1 & 2 & 3              \\ \hline
+                3 & 4 & 0 & 1 & 2              \\ \hline
+                2 & 3 & 4 & 0 & 1              \\ \hline
+                1 & 2 & 3 & 4 & 0              \\ \hline
+            \end{array}\hspace{1em}
+            \begin{array}{|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|}
+                \multicolumn{5}{c}{\alpha = 2} \\ \hline
+                0 & 1 & 2 & 3 & 4              \\ \hline
+                3 & 4 & 0 & 1 & 2              \\ \hline
+                1 & 2 & 3 & 4 & 0              \\ \hline
+                4 & 0 & 1 & 2 & 3              \\ \hline
+                2 & 3 & 4 & 0 & 1              \\ \hline
+            \end{array}\hspace{1em}
+            \begin{array}{|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|}
+                \multicolumn{5}{c}{\alpha = 3} \\ \hline
+                0 & 1 & 2 & 3 & 4              \\ \hline
+                2 & 3 & 4 & 0 & 1              \\ \hline
+                4 & 0 & 1 & 2 & 3              \\ \hline
+                1 & 2 & 3 & 4 & 0              \\ \hline
+                3 & 4 & 0 & 1 & 2              \\ \hline
+            \end{array}\hspace{1em}
+            \begin{array}{|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|>{\hspace{-2pt}}c<{\hspace{-2pt}}|}
+                \multicolumn{5}{c}{\alpha = 4} \\ \hline
+                0 & 1 & 2 & 3 & 4              \\ \hline
+                1 & 2 & 3 & 4 & 0              \\ \hline
+                2 & 3 & 4 & 0 & 1              \\ \hline
+                3 & 4 & 0 & 1 & 2              \\ \hline
+                4 & 0 & 1 & 2 & 3              \\ \hline
+            \end{array}
+        \end{gather*}
     \end{block}
-  
+
 \end{frame}
 
 
@@ -208,37 +208,37 @@
 \begin{frame}{Метод строк и столбцов}
 
     \begin{block}{}
-        В каждом латинском квадрате системы ищем строку и столбец, содержащий только один неизвестный элемент. 
+        В каждом латинском квадрате системы ищем строку и столбец, содержащий только один неизвестный элемент.
         Повторяем, пока любая строка и любой столбец не будут содержать либо 0, либо не менее 2 неизвестных элементов.
     \end{block}
 
     \begin{gather*}
         \LSfive{
-             &  &  & 3 & 4 \\ \hline
-             &  &  & 4 & 0 \\ \hline
+            &  &  & 3 & 4 \\ \hline
+            &  &  & 4 & 0 \\ \hline
             2 &  & 4 & \cc & \cc \\ \hline
             3 & 4 & 0 & 1 & 2 \\ \hline
             4 & 0 & 1 & 2 & 3 \\ \hline
         }
         \Rightarrow
         \LSfive {
-             &  &  & 3 & 4 \\ \hline
-             &  &  & 4 & 0 \\ \hline
+            &  &  & 3 & 4 \\ \hline
+            &  &  & 4 & 0 \\ \hline
             2 & \cc & 4 & 0 & 1 \\ \hline
             3 & 4 & 0 & 1 & 2 \\ \hline
             4 & 0 & 1 & 2 & 3 \\ \hline
         }
         \Rightarrow
         \LSfive{
-             &  &  & 3 & 4 \\ \hline
-             &  &  & 4 & 0 \\ \hline
+            &  &  & 3 & 4 \\ \hline
+            &  &  & 4 & 0 \\ \hline
             2 & 3 & 4 & 0 & 1 \\ \hline
             3 & 4 & 0 & 1 & 2 \\ \hline
             4 & 0 & 1 & 2 & 3 \\ \hline
         }
     \end{gather*}
 \end{frame}
-  
+
 
 \subsection{Диагональный метод}
 \begin{frame}{Диагональный метод}
@@ -284,24 +284,25 @@
     \end{gather*}
 \end{frame}
 
+
 \section{Перебор конфигураций}
 \begin{frame}{Полный перебор}
 
     \centering
     \begin{tabular}{|r|r|}\hline
-        \rowcolor{green}\textcolor{white}{\;$n$\;} &\bf \textcolor{white}{Количество конфигураций} \\ \hline
-        3 & 126 \\ \hline
-        4 & 11\,440 \\ \hline
-        5 & 2\,042\,975 \\ \hline
-        7 & 262\,596\,783\,764 \\ \hline
-        8 & 159\,518\,999\,862\,720 \\ \hline
-        9 & 128\,447\,994\,798\,305\,325 \\ \hline
-        11 & 169\,758\,547\,725\,351\,091\,518\,726 \\ \hline
-        13 & 495\,874\,093\,230\,232\,452\,749\,553\,398\,586 \\ \hline
-        16 & 8\,283\,675\,595\,268\,374\,292\,919\,471\,912\,522\,442\,632\,960 \\ \hline
+        \rowcolor{mainColor1}\textcolor{white}{\;$n$\;} & \bf \textcolor{white}{Количество конфигураций}                     \\ \hline
+        3                                               & 126                                                                \\ \hline
+        4                                               & 11\,440                                                            \\ \hline
+        5                                               & 2\,042\,975                                                        \\ \hline
+        7                                               & 262\,596\,783\,764                                                 \\ \hline
+        8                                               & 159\,518\,999\,862\,720                                            \\ \hline
+        9                                               & 128\,447\,994\,798\,305\,325                                       \\ \hline
+        11                                              & 169\,758\,547\,725\,351\,091\,518\,726                             \\ \hline
+        13                                              & 495\,874\,093\,230\,232\,452\,749\,553\,398\,586                   \\ \hline
+        16                                              & 8\,283\,675\,595\,268\,374\,292\,919\,471\,912\,522\,442\,632\,960 \\ \hline
     \end{tabular}
 
-\end{frame} 
+\end{frame}
 
 
 \section{Результаты}
@@ -313,8 +314,8 @@
             \item Для реализации алгоритма использованы Apache MXNet и NumPy
         \end{itemize}
     \end{block}
-  
-\end{frame} 
+
+\end{frame}
 
 
 \begin{frame}{Доказанные свойства}
@@ -328,8 +329,8 @@
             \item Полная линейная система попарно ортогональных латинских квадратов порядка $n$ и эквивалентная ей при наличии не более $2n - 1$ неизвестных элементов однозначно восстанавливается в своём классе эквивалентности.
         \end{itemize}
     \end{block}
-  
-\end{frame} 
+
+\end{frame}
 
 
 \begin{frame}{Полученные результаты}
@@ -343,8 +344,9 @@
             \item Подтверждена гипотеза о восстановлении системы попарно ортогональных латинских квадратов порядка $n\in\{3,4,5,7,8\}$
         \end{itemize}
     \end{block}
-  
-\end{frame} 
+
+\end{frame}
+
 
 \section{Список публикаций}
 \begin{frame}{Публикации}
@@ -353,19 +355,23 @@
         \begin{itemize}
             \item Данилко В. Р. Восстановление системы попарно ортогональных латинских квадратов по частичной информации~// Мальцевские чтения. Международная конференция (Новосибирск, 19--22 ноября 2018 г.). Новосибирск, 2018 г. С. 87.
             \item Gorkunov E. V., Danilko V. R. Reconstructing sets of Latin squares, linear and equivalent to linear codes~//
-            Proc. XVI Int. Symp. ``Problems of Redundancy in Information and Control Systems'' (Moscow, Russia, Oct.~21--25, 2019). 2019. P.~47--51.
+                  Proc. XVI Int. Symp. ``Problems of Redundancy in Information and Control Systems'' (Moscow, Russia, Oct.~21--25, 2019). 2019. P.~47--51.
         \end{itemize}
     \end{block}
-  
-\end{frame} 
 
+\end{frame}
+
+
+% --------------------------------------------------- %
+%                       Информация   	              %
+% --------------------------------------------------- %
 
 \begin{frame}[standout]
-    
+
     \Huge\centering
     \textcolor{white}{\bf Спасибо за внимание!}
-  
-\end{frame} 
+
+\end{frame}
 
 
 \end{document}

@@ -22,3 +22,6 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+.DS_store
+sourcesNSU/sourcesNSU-eps-converted-to.pdf

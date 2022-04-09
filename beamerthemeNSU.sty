@@ -1,53 +1,13 @@
-% \RequirePackage{calc}
-% \RequirePackage{etoolbox}
-\RequirePackage[T2A]{fontenc}
-\RequirePackage[utf8]{inputenc}
-% \RequirePackage{thmtools}
-% \RequirePackage{tikz}
-% \hypersetup{colorlinks,
-%             urlcolor  = uiblink,
-%             linkcolor =,
-%             citecolor =}
- 
-%           
-% \NeedsTeXFormat{LaTeX2e}
-% \ProvidesClass{NSU}[17/05/2020, NSU]
-% \PassOptionsToPackage{svgnames, table}{xcolor}
-
-%
-% \RequirePackage{helvet}
-% \RequirePackage{pdfpages}
-% \RequirePackage{graphicx}
-% \RequirePackage[footnotesize,hang]{caption}
-% \RequirePackage{hyperref}
-% \RequirePackage{tikz}
+\mode<presentation>
 
 \RequirePackage{listings}
-
-%
-% \RequirePackage{etoolbox}
-
 \RequirePackage[many]{tcolorbox}
-
-%
-% \RequirePackage{tabularx}
-% \RequirePackage{array}
-% \RequirePackage{colortbl}
-% \tcbuselibrary{skins}
-
 \RequirePackage{ragged2e}
 
-%
-% \RequirePackage{courier}
 
-\usefonttheme{default}
-
-
-% \mode<presentation>
-
-% "------------- %
-% Базовые цвета %
-% "------------- %
+% "----------- %
+%  Base colors %
+% "----------- %
 
 \definecolor{blue}{RGB}{19, 195, 237}
 \definecolor{light_blue}{RGB}{216, 247, 255}
@@ -55,68 +15,72 @@
 \definecolor{light_green}{RGB}{207, 240, 202}
 \definecolor{red}{RGB}{226, 7, 19}
 \definecolor{light_red}{RGB}{254, 218, 220}
-
 \definecolor{black}{RGB}{0, 0, 0}
 \definecolor{ash_grey}{RGB}{58, 58, 57}
 \definecolor{cadet_grey}{RGB}{89, 89, 89}
 \definecolor{light_gray}{RGB}{166, 166, 166}
 \definecolor{white}{RGB}{255, 255, 255}
 
-% "-------------- %
-%  Установка темы %
-% "-------------- %
 
+% "----------- %
+%  Color theme %
+% "----------- %
 
 \providebool{is_red}
 \DeclareOptionBeamer{red}{\setbool{is_red}{true}}
 \DeclareOptionBeamer{green}{\setbool{is_red}{false}}
+\ProcessOptionsBeamer
+
+\newcommand{\file}{sourcesNSU/sourcesNSU.eps}
 
 \ifbool{is_red}{
-    \newcommand{\fileBackground}{figuras/NSU_Red.eps}
-    \newcommand{\fileLogo}{figuras/NSU_solologo_Red.eps}
+    \setbeamertemplate{background canvas}{%
+        \ifnum\c@framenumber=1%
+            \includegraphics[trim=0 570 0 2160, clip, width=\paperwidth, height=\paperheight]{\file}
+        \else%
+            \includegraphics[trim=0 1102 0 1621, clip, width=\paperwidth, height=\paperheight]{\file}
+        \fi%
+    }
+
+    \define@key{beamerframe}{standout}[true]{%
+        \usebackgroundtemplate{\includegraphics[trim=0 30 0 2700, clip, width=\paperwidth, height=\paperheight]{\file}}
+    }
     \colorlet{mainColor1}{red}
     \colorlet{mainColor2}{red!10}
 }{
-    \newcommand{\fileBackground}{figuras/NSU_Green.eps}
-    \newcommand{\fileLogo}{figuras/NSU_solologo_Green.eps}
+    \setbeamertemplate{background canvas}{%
+        \ifnum\c@framenumber=1%
+            \includegraphics[trim=0 2190 0 540, clip, width=\paperwidth, height=\paperheight]{\file}
+        \else%
+            \includegraphics[trim=0 2723 0 0, clip, width=\paperwidth, height=\paperheight]{\file}
+        \fi%
+    }
+
+    \define@key{beamerframe}{standout}[true]{%
+        \usebackgroundtemplate{\includegraphics[trim=0 1650 0 1080, clip, width=\paperwidth, height=\paperheight]{\file}}
+    }
     \colorlet{mainColor1}{green}
     \colorlet{mainColor2}{green!10}
 }
 
-\setbeamertemplate{background canvas}{%
-    \ifnum\c@framenumber=1%
-        \includegraphics[trim=0 540 0 540, clip, width=\paperwidth, height=\paperheight]{\fileBackground}
-    \else%
-        \includegraphics[trim=0 1080 0 0, clip, width=\paperwidth, height=\paperheight]{\fileBackground}
-    \fi%
-}
 
-
-\define@key{beamerframe}{standout}[true]{%
-    \usebackgroundtemplate{\includegraphics[trim=0 0 0 1080, clip, width=\paperwidth, height=\paperheight]{\fileBackground}}
-}
-
-
-% "---------------- %
-%  Установка цветов %
-% "---------------- %
+% "--------- %
+%  Color set %
+% "--------- %
 
 % Main structure colors
 \colorlet{bodyColor}{white}
 \colorlet{titleColor}{mainColor1}
 \colorlet{chipColor}{mainColor1}
-
 % Sections colors
 \colorlet{sectionColor}{black}
 \colorlet{subsectionColor}{ash_grey}
-
 % Footline colors
 \colorlet{authorFootlineColor}{ash_grey}
 \colorlet{instituteFootlineColor}{ash_grey}
 \colorlet{titleFootlineColor}{mainColor1}
 \colorlet{pageFootlineColor}{ash_grey}
 \colorlet{dateFootlineColor}{ash_grey}
-
 % Block colors
 \colorlet{normalTitleBlockColor}{mainColor1}
 \colorlet{normalBlockColor}{mainColor2}
@@ -124,7 +88,6 @@
 \colorlet{exampleBlockColor}{light_blue}
 \colorlet{alertTitleBlockColor}{red}
 \colorlet{alertBlockColor}{light_red}
-
 % Code colors
 \definecolor{CodeGreen}{rgb}{0,0.6,0}
 \definecolor{CodePurple}{rgb}{0.58,0,0.82}
@@ -157,23 +120,27 @@
 \colorlet{tableBodyTextColor}{black}
 
 
+% "----- %
+%  Fonts %
+% "----- %
 
-
-
-
-
-%SHRIFTI
-
+\usefonttheme{serif}
 \setbeamerfont{frametitle}{size={\fontsize{14}{0}}}
-
 \setbeamerfont{author in head/foot}{size={\fontsize{6}{0}}}
 \setbeamerfont{title in head/foot}{size={\fontsize{6}{0}}}
 \setbeamerfont{institute in head/foot}{size={\fontsize{6}{0}}}
 \setbeamerfont{date in head/foot}{size={\fontsize{6}{0}}}
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{institute}{size={\fontsize{6}{0}}}
+\setbeamerfont*{bibliography entry author}{series=\bfseries}
+\setbeamerfont*{bibliography entry title}{series=\bfseries}
+\setbeamerfont*{description item}{series=\bfseries}
 
-% "--------- %
-%  Структуры %
-% "--------- %
+
+% "---------- %
+%  Structures %
+% "---------- %
 % http://www.cpt.univ-mrs.fr/~masson/latex/Beamer-appearance-cheat-sheet.pdf
 
 \usecolortheme[named=black]{structure}
@@ -195,31 +162,28 @@
 \setbeamercolor{description item}{fg=titleColor!70}
 
 % Frame
-
-
-
 \setbeamertemplate{frametitle} {
-% \bfseries
-\ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}
-\@tempdima=\textwidth
-\advance\@tempdima by\beamer@leftmargin
-\advance\@tempdima by\beamer@rightmargin
-\pgfsetfillopacity{.0}
-\begin{beamercolorbox}[sep=0.4cm,left,wd=\the\@tempdima]{frametitle}
-	\usebeamerfont{frametitle}
-	\vbox{}
-	\vskip-1.6ex
-% 	\hspace{-1.5ex}
-	\if@tempswa\else\csname beamer@fteleft\endcsname\fi
-	\strut\pgfsetfillopacity{1}\insertframetitle\strut\par{
-	\ifx\insertframesubtitle\@empty
-	\else
-		{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}
-	\fi
-	}
-	\vskip-1ex
-	\if@tempswa\else\vskip-.3cm\fi
-\end{beamercolorbox}
+    % \bfseries
+    \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}
+    \@tempdima=\textwidth
+    \advance\@tempdima by\beamer@leftmargin
+    \advance\@tempdima by\beamer@rightmargin
+    \pgfsetfillopacity{.0}
+    \begin{beamercolorbox}[sep=0.4cm,left,wd=\the\@tempdima]{frametitle}
+        \usebeamerfont{frametitle}
+        \vbox{}
+        \vskip-1.6ex
+        % 	\hspace{-1.5ex}
+        \if@tempswa\else\csname beamer@fteleft\endcsname\fi
+        \strut\pgfsetfillopacity{1}\insertframetitle\strut\par{
+            \ifx\insertframesubtitle\@empty
+                \else
+                {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}
+            \fi
+        }
+        \vskip-1ex
+        \if@tempswa\else\vskip-.3cm\fi
+    \end{beamercolorbox}
 }
 
 % Footline
@@ -228,65 +192,63 @@
 \setbeamercolor{institute in head/foot}{bg=instituteFootlineColor, fg=instituteFootlineTextColor}
 \setbeamercolor{date in head/foot}{bg=dateFootlineColor, fg=dateFootlineTextColor}
 
-
-
 \defbeamertemplate*{footline}{infolines theme}{
-\ifnum \theframenumber=1%
+    \ifnum \theframenumber=1%
 
-\else%
-    % \leavevmode%
-    % \series
-    \hbox{%
-        \begin{beamercolorbox}[wd=.3\paperwidth,ht=6px,dp=2.5px,left]{author in head/foot}%
-        	\usebeamerfont{author in head/foot}\hspace*{2ex}\insertshortauthor
-        \end{beamercolorbox}%
-        \begin{beamercolorbox}[wd=.4\paperwidth,ht=6px,dp=2.5px,center]{title in head/foot}%
-        	\usebeamerfont{title in head/foot}\insertshorttitle
-        \end{beamercolorbox}%
-        \begin{beamercolorbox}[wd=.3\paperwidth,ht=6px,dp=2.5px,right]{date in head/foot}%
-        	\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2ex}
-        	\insertframenumber{}/\inserttotalframenumber\hspace*{2ex}
-        \end{beamercolorbox}%
-    }
-    \vskip0pt%
-\fi%
+    \else%
+        % \leavevmode%
+        % \series
+        \hbox{%
+            \begin{beamercolorbox}[wd=.3\paperwidth,ht=6px,dp=2.5px,left]{author in head/foot}%
+                \usebeamerfont{author in head/foot}\hspace*{2ex}\insertshortauthor
+            \end{beamercolorbox}%
+            \begin{beamercolorbox}[wd=.4\paperwidth,ht=6px,dp=2.5px,center]{title in head/foot}%
+                \usebeamerfont{title in head/foot}\insertshorttitle
+            \end{beamercolorbox}%
+            \begin{beamercolorbox}[wd=.3\paperwidth,ht=6px,dp=2.5px,right]{date in head/foot}%
+                \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2ex}
+                \insertframenumber{}/\inserttotalframenumber\hspace*{2ex}
+            \end{beamercolorbox}%
+        }
+        \vskip0pt%
+    \fi%
 }
 
 
-\mode
-<all>
-
-% "----------------- %
-% Обновление команд %
-% "----------------- %
+% "-------------- %
+%  Comands update %
+% "-------------- %
 
 \setbeamertemplate{title page}{
     \hspace{0.25\linewidth}
     \begin{minipage}{0.81\linewidth}\small\centering
-    	\begin{beamercolorbox}[sep=8pt,center]{institute}
-    		\usebeamerfont{institute}\insertinstitute
-    	\end{beamercolorbox}
-    	\begin{beamercolorbox}[sep=8pt,center]{title}
-    		\usebeamerfont{title}\inserttitle\par
-    		\ifx\insertsubtitle\@empty
-    		\else
-    			\vskip0.25em
-    			{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
-    		\fi
-    	\end{beamercolorbox}
-    	\vskip1em\par
-    	\begin{beamercolorbox}[sep=8pt,center]{author}
-    		\usebeamerfont{author}\insertauthor
-    	\end{beamercolorbox}
-    	\begin{beamercolorbox}[sep=8pt,center]{date}
-    		\usebeamerfont{date}\insertdate
-    	\end{beamercolorbox}
+        \begin{beamercolorbox}[sep=8pt,center]{institute}
+            \usebeamerfont{institute}\insertinstitute
+        \end{beamercolorbox}
+        \begin{beamercolorbox}[sep=8pt,center]{title}
+            \usebeamerfont{title}\inserttitle\par
+            \ifx\insertsubtitle\@empty
+            \else
+                \vskip0.25em
+                {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+            \fi
+        \end{beamercolorbox}
+        \vskip1em\par
+        \begin{beamercolorbox}[sep=8pt,center]{date}
+            \usebeamerfont{date}\insertdate
+        \end{beamercolorbox}
     \end{minipage}
 }
 
-\setbeamertemplate{section in toc}{\includegraphics[trim = 60 45 0 0, clip, scale=0.18]{\fileLogo}~\inserttocsection}
-\setbeamertemplate{subsection in toc}{\hspace{1.5em}\includegraphics[trim = 60 45 0 0, clip, scale=0.18]{\fileLogo}~\inserttocsubsection\par}
-\setbeamertemplate{itemize items}{\includegraphics[trim = 60 45 0 0, clip, scale=0.18]{\fileLogo}}
+\ifbool{is_red}{
+    \setbeamertemplate{section in toc}{\includegraphics[trim = 13 1 695 3251, clip, scale=0.55]{\file}~\inserttocsection}
+    \setbeamertemplate{subsection in toc}{\hspace{1.5em}\includegraphics[trim = 13 1 695 3251, clip, scale=0.55]{\file}~\inserttocsubsection\par}
+    \setbeamertemplate{itemize items}{\includegraphics[trim = 13 1 695 3251, clip, scale=0.55]{\file}}
+}{
+    \setbeamertemplate{section in toc}{\includegraphics[trim = 0 1 708 3251, clip, scale=0.55]{\file}~\inserttocsection}
+    \setbeamertemplate{subsection in toc}{\hspace{1.5em}\includegraphics[trim = 0 1 708 3251, clip, scale=0.55]{\file}~\inserttocsubsection\par}
+    \setbeamertemplate{itemize items}{\includegraphics[trim = 0 1 708 3251, clip, scale=0.55]{\file}}
+}
 
 \apptocmd{\frame}{}{\justifying}{} % Allow optional arguments after frame.
 
@@ -307,9 +269,10 @@
 %     \endgroup
 % }
 
-% "------- %
-% Таблица %
-% "------- %
+
+% "------ %
+%  Tables %
+% "------ %
 
 \tcbset{nsutable/.style={enhanced,
 		arc=0em,
@@ -319,12 +282,14 @@
 		colframe=mainColor1!70!black,
 		colbacktitle=mainColor1!100!white,
 		coltitle=white,
-		center title}}
+		center title
+	}
+}
 
-% "----- %
-% Блоки %
-% "----- %
 
+% "------ %
+%  Blocks %
+% "------ %
 
 \setbeamertemplate{blocks}[rectangle]
 
@@ -343,46 +308,48 @@
 \AtBeginEnvironment{exampleblock}{\setbeamercolor{itemize item}{fg=exampleTitleBlockColor!70}}
 \AtBeginEnvironment{alertblock}{\setbeamercolor{itemize item}{fg=alertTitleBlockColor!70}}
 
-% "----- %
-% Боксы %
-% "----- %
+
+% "---- %
+%  Boxs %
+% "---- %
 
 \newcommand{\codebox}[1]{
-\begin{center}
-	\begin{tcolorbox}[colback=mainColor2,
-			colframe=mainColor1,
-			arc=3mm, auto outer arc,
-			boxrule=1.5pt]
-		#1
-	\end{tcolorbox}
-\end{center}
+    \begin{center}
+        \begin{tcolorbox}[colback=mainColor2,
+                colframe=mainColor1,
+                arc=3mm, auto outer arc,
+                boxrule=1.5pt]
+            #1
+        \end{tcolorbox}
+    \end{center}
 }
 
 \newcommand{\titlebox}[1]{
-\begin{center}
-	\begin{tcolorbox}[colback=mainColor1,
-			coltitle=white,
-			colframe=mainColor1,
-			arc=0mm, auto outer arc,
-			boxrule=1.5pt]
-		#1
-	\end{tcolorbox}
-\end{center}
+    \begin{center}
+        \begin{tcolorbox}[colback=mainColor1,
+                coltitle=white,
+                colframe=mainColor1,
+                arc=0mm, auto outer arc,
+                boxrule=1.5pt]
+            #1
+        \end{tcolorbox}
+    \end{center}
 }
 
 \newcommand{\textbox}[1]{
-\begin{center}
-	\fcolorbox{mainColor2}{mainColor2}{
-	\begin{minipage}{1.\textwidth}
-		#1
-	\end{minipage}
-	}
-\end{center}
+    \begin{center}
+        \fcolorbox{mainColor2}{mainColor2}{
+            \begin{minipage}{1.\textwidth}
+                #1
+            \end{minipage}
+        }
+    \end{center}
 }
 
-% "------------------ %
-% Стиль вставок кода %
-% "------------------ %
+
+% "------------- %
+%  Algoritim box %
+% "------------- %
 
 \definecolor{backcolour}{RGB}{245,245,245}
 \definecolor{commentcolour}{RGB}{0,128,0}
@@ -391,25 +358,23 @@
 
 \renewcommand\lstlistingname{Algoritimo}
 \lstdefinestyle{mystyle}{
-backgroundcolor=\color{backcolour},
-commentstyle=\color{commentcolour},
-keywordstyle=\color{keywordcolour}\bfseries,
-numberstyle=\tiny\color{black},
-stringstyle=\color{stringcolour},
-emphstyle=\color{red},
-basicstyle=\footnotesize,
-breakatwhitespace=false,
-breaklines=true,
-captionpos=t,
-keepspaces=true,
-numbers=left,
-numbersep=5pt,
-showspaces=false,
-showstringspaces=false,
-showtabs=false,
-tabsize=2
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{commentcolour},
+    keywordstyle=\color{keywordcolour}\bfseries,
+    numberstyle=\tiny\color{black},
+    stringstyle=\color{stringcolour},
+    emphstyle=\color{red},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=t,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
 }
 
 \lstset{style=mystyle}
-
-
